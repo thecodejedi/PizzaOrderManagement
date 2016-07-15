@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\TotalOrder;
 use AppBundle\Entity\SingleOrder;
 use AppBundle\Form\SingleOrderType;
+use AppBundle\Form\TotalOrderType;
 
 /**
  * @Route("/orders")

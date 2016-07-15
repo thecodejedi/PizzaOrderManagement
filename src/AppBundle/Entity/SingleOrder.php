@@ -27,6 +27,8 @@ class SingleOrder {
     
     /**
      * @ORM\Column(type="text")
+     * @Assert\Valid
+     * @Assert\NotNull
      */
     protected $name;
     
@@ -35,6 +37,12 @@ class SingleOrder {
      * @ORM\JoinColumn(name="totalOrder_id", referencedColumnName="id")
      */
     protected $order;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="orders", cascade={"persist"})
+     * @ORM\JoinColumn(name="singleOrder_id", referencedColumnName="id")
+     */
+    protected $product;
 
     /**
      * Get id
@@ -116,5 +124,29 @@ class SingleOrder {
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \AppBundle\Entity\Product $product
+     *
+     * @return SingleOrder
+     */
+    public function setProduct(\AppBundle\Entity\Product $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \AppBundle\Entity\Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
     }
 }

@@ -4,6 +4,7 @@
     <div class="container container-fluid">
         {% for order in totalOrder.orders %}
             <div class="row">
+                <div class="col-md-3">{{order.id}}</div>
                 <div class="col-md-3">{{order.name}}</div>
             </div>
         {% endfor %}
