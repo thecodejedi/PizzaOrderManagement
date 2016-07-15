@@ -1,0 +1,73 @@
+{% extends 'MopaBootstrapBundle::layout.html.twig' %}
+{% block title %}POM - {% block pageName %}{% endblock %}{% endblock %}
+{% block head_style %}
+    {# Override this block to add your own files! #}
+    {% stylesheets filter='lessphp,cssrewrite'
+            '@AppBundle/Resources/public/less/*.less'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+    {# Override this block to add your own files! #}
+    {% stylesheets filter='lessphp,cssrewrite'
+            '@AppBundle/Resources/public/css/*.css'
+    %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
+    <link rel="shortcut icon" type="image/png" href="{{ asset('favicon.png') }}" />
+    <link rel="apple-touch-icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {# To use this without less use the base_css.html.twig template as your base
+     # Be sure you understand whats going on: have a look into
+     # https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/css-vs-less.md
+     #}
+{% endblock head_style %}
+
+{% block head_script %}
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+    {% javascripts
+'@AppBundle/Resources/public/js/*.js' 
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+    </script>
+{% endblock head_script %}
+{% block container %}
+    {% block contentBody %}
+
+        <div class="mainWrapper" style="width: 100%">
+            <div class="container container-main" id="mainContainer">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock%}
+    {% block contentFooter %}
+        <div class="container-fluid" id="footer">
+            <div class="row" style="margin-top: 40px">
+                <div class="col-md-4">
+                    <span>Website designed by <a href="https://github.com/thecodejedi/PizzaOrderManagement" target="_blank">thecodejedi</a></span>
+                </div>
+            </div>
+        </div>
+    {% endblock%}
+{% endblock%}
+{% block foot_script_assetic %}
+    {% javascripts
+    '@MopaBootstrapBundle/Resources/public/bootstrap/js/tooltip.js'
+    '@MopaBootstrapBundle/Resources/public/bootstrap/js/*.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
+    '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock foot_script_assetic %}

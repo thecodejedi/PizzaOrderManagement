@@ -39,6 +39,7 @@ twig:
 
 assetic:
     debug: "%kernel.debug%"
+    bundles:        [ AppBundle ]
     use_controller: false
     filters:
         cssrewrite: ~
