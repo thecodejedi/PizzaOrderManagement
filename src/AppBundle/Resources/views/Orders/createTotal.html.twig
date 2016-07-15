@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <h3>Total Order</h3>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-3">
+                {{ form_label(form.active) }}
+                {{ form_errors(form.active) }}
+                {{ form_widget(form.active) }}
+            </div>
+            
+            <div class="col-md-3">
+                {{ form_label(form.text) }}
+                {{ form_errors(form.text) }}
+                {{ form_widget(form.text) }}
+            </div>
+            
+        </div><br/>
+        <div class="row"><div class="col-md-12">
+                {{ form_widget(form.save) }} {{ form_widget(form.cancel) }}
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}

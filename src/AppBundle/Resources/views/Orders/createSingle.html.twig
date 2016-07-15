@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <h3>Place your Order</h3>
+    <div class="container-fluid">
+        <div class="row">   
+            <div class="col-md-3">
+                {{ form_label(form.name) }}
+                {{ form_errors(form.name) }}
+                {{ form_widget(form.name) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label(form.text) }}
+                {{ form_errors(form.text) }}
+                {{ form_widget(form.text) }}
+            </div>
+
+        </div><br/>
+        <div class="row"><div class="col-md-12">
+                {{ form_widget(form.save) }} {{ form_widget(form.cancel) }}
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}

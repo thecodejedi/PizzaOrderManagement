@@ -20,9 +20,9 @@ class MenuController Implements ContainerAwareInterface {
         }
 
         $menu->addChild('Home', array('route' => 'index'));
+        $menu->addChild('History', array('route' => 'history'));
         if ($isAdmin) {
         }
-        $menu->addChild('Abmelden', array('route' => 'logout'));
 
 
 

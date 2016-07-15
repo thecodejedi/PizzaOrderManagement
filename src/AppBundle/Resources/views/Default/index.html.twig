@@ -1,1 +1,5 @@
 {% extends 'base.html.twig' %}
+{% block content %}
+    <h3>Sorry there is no order for today</h3>
+    <a href="{{path('createTotalOrder')}}">Create new Order</a>
+{% endblock %}

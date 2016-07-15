@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <h3>Orders</h3>
+    <div class="container container-fluid">
+        {% for order in totalOrder.orders %}
+            <div class="row">
+                <div class="col-md-3">{{order.name}}</div>
+            </div>
+        {% endfor %}
+        {% if totalOrder.active %}
+            <a href="{{path('createSingle',{'totalId':totalOrder.id})}}">Create new Order</a>
+        {% endif %}
+    </div>
+{% endblock %}
