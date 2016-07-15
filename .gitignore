@@ -14,3 +14,6 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+/web/css/
+/web/images/
+/web/js/
