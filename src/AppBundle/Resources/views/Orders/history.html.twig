@@ -1,4 +1,38 @@
 {% extends 'base.html.twig' %}
 {% block content %}
-    History
+    Following Total Orders are available
+    <div class="container container-fluid">
+
+        {% for totalOrder in allOrders %}
+            <div class="row">
+                <div class="col-md-1">
+                    <a href="{{path('editTotalAction',{'totalId':totalOrder.id})}}">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </a>
+                    <a href="{{path('displayTotalOrder',{'totalId':totalOrder.id})}}">
+                        <i class="fa fa-list-ol" aria-hidden="true"></i>
+
+                    </a>
+                </div>
+                <div class="col-md-1">
+                    {{totalOrder.id}}
+                </div>
+                <div class="col-md-1">
+                    {%if totalOrder.active %}
+                        Open
+                    {% else %}
+                        Closed
+                    {% endif%}
+                </div>
+                <div class="col-md-1">
+                    {{totalOrder.date|date('d.m.y')}}
+                </div>
+                <div class="col-md-9">
+                    {{totalOrder.text}}
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
 {% endblock %}

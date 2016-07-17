@@ -1,15 +1,29 @@
 {% extends 'base.html.twig' %}
 {% block content %}
-    <h3>Orders</h3>
+    <h3>Orders for {{totalOrder.date|date('d.m.y')}}</h3>
     <div class="container container-fluid">
+        <div class="row">
+            {% if totalOrder.active %}
+                <div class="col-md-3">
+                    <h3><a href="{{path('createSingle',{'totalId':totalOrder.id})}}"><i class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;Create new Order</a></h3>
+                </div>
+            {% else %}
+                <div class="col-md-3">
+                    <h3 style="color: orange"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;This order is closed.</h3>
+                </div>
+            {% endif %}
+            <div class="col-md-3">
+                <a href="{{path('editTotalAction',{'totalId':totalOrder.id})}}">
+                    <h3><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;Edit Order</h3>
+                </a>
+            </div>
+
+        </div>
         {% for order in totalOrder.orders %}
             <div class="row">
                 <div class="col-md-3">{{order.id}}</div>
                 <div class="col-md-3">{{order.name}}</div>
             </div>
         {% endfor %}
-        {% if totalOrder.active %}
-            <a href="{{path('createSingle',{'totalId':totalOrder.id})}}">Create new Order</a>
-        {% endif %}
     </div>
 {% endblock %}

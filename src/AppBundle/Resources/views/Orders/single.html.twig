@@ -12,6 +12,11 @@
                 {{ form_widget(form.name) }}
             </div>
             <div class="col-md-3">
+                {{ form_label(form.product) }}
+                {{ form_errors(form.product) }}
+                {{ form_widget(form.product) }}
+            </div>
+            <div class="col-md-3">
                 {{ form_label(form.text) }}
                 {{ form_errors(form.text) }}
                 {{ form_widget(form.text) }}

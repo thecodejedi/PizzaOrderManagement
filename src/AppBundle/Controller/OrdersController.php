@@ -48,7 +48,7 @@ class OrdersController extends Controller {
      * @Route("/{totalId}/createSingle", 
      * requirements = { "totalId" = "[0-9]+" },
      * name="createSingle")
-     * @Template
+     * @Template("AppBundle:Orders:single.html.twig")
      */
     public function createSingleAction(Request $request, $totalId) {
 
@@ -80,13 +80,44 @@ class OrdersController extends Controller {
     /**
      * @Route("/createTotal", name="createTotalOrder")
      * @Security("has_role('ROLE_ADMIN')")
-     * @Template
+     * @Template("AppBundle:Orders:total.html.twig")
      */
     public function createTotalAction(Request $request) {
 
         $totalOrder = new TotalOrder();
         $totalOrder->setActive(true);
         $totalOrder->setDate(new \DateTime());
+        $form = $this->createForm(TotalOrderType::class, $totalOrder);
+        $form->handleRequest($request);
+
+        if ($form->get('cancel')->isClicked()) {
+            return $this->redirectToRoute('index');
+        }
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($totalOrder);
+            $em->flush();
+            return $this->redirectToRoute('index');
+        }
+
+        return array(
+            'form' => $form->createView());
+    }
+
+    /**
+     * @Route("/{totalId}/edit", 
+     *          name="editTotalAction",
+     *          requirements = { "totalId" = "[0-9]+" })
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Template("AppBundle:Orders:total.html.twig")
+     */
+    public function editTotalAction(Request $request,$totalId) {
+        
+        $totalOrder = $this->getDoctrine()
+                ->getRepository('AppBundle:TotalOrder')
+                ->find($totalId);
+        
         $form = $this->createForm(TotalOrderType::class, $totalOrder);
         $form->handleRequest($request);
 

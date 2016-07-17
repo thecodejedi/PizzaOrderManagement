@@ -33,9 +33,7 @@ class TotalOrder {
     protected $date;
 
     /**
-     * @ORM\Column(type="boolean", nullable = false)
-     * @Assert\Valid
-     * @Assert\NotBlank(message = "Activity has to be set.")
+     * @ORM\Column(type="boolean")
      */
     protected $active;
 
