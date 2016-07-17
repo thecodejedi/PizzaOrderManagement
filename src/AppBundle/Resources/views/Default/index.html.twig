@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block content %}
     <h3>Sorry there is no order for today</h3>
-    <a href="{{path('createTotalOrder')}}">Create new Order</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{path('createTotalOrder')}}">Create new Order</a>
+    {% else %}
+        The order has not been opened yet.
+    {% endif %}
+
+
 {% endblock %}

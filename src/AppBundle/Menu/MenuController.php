@@ -14,14 +14,21 @@ class MenuController Implements ContainerAwareInterface {
         $authChecker = $this->container->get('security.authorization_checker');
         $isAdmin = $authChecker->isGranted('ROLE_ADMIN');
 
+        $isAuthenticated = $authChecker->isGranted('IS_AUTHENTICATED_FULLY');
+        
+    
         $menu = $factory->createItem('root');
         if (isset($arguments['rootClass'])) {
             $menu->setChildrenAttribute('class', $arguments['rootClass']);
         }
 
         $menu->addChild('Home', array('route' => 'index'));
-        $menu->addChild('History', array('route' => 'history'));
-        if ($isAdmin) {
+        $menu->addChild('Orders', array('route' => 'orders'));
+        
+        if ($isAuthenticated) {
+            $menu->addChild('Logout', array('route' => 'logout_route'));
+        }else{
+            $menu->addChild('Login', array('route' => 'login_route'));
         }
 
 

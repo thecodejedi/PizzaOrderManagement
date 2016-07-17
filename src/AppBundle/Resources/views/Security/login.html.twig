@@ -1,0 +1,49 @@
+{% extends 'styleBase.html.twig' %}
+{% block contentBody %}
+    <div class="container">
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <div class="jumbotron">
+                    {% image '@AppBundle/Resources/public/images/bigLogo.jpg'
+    output='/images/bigLogo.jpg' %}
+                    <img style="max-width:100%;max-height:100%;" src="{{ asset_url }}" alt="Pizza Order Management"/>
+                    {% endimage %}
+                    <h3>Pizza Order Management</h3>
+<br/>
+                    <h1>Login required</h1>
+
+
+                    {% if error %}
+                        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    <form action="{{ path('login_check') }}" method="post">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input style="margin-top: 15px" type="text" id="username" name="_username" placeholder="Benutzername"  value="{{ last_username }}" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input style="margin-top: 15px" type="password" id="password" placeholder="Passwort" name="_password" /><br/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button style="margin-top: 15px" class="btn btn-primary btn-lg" type="submit">Anmelden</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+    </div>
+{% endblock %}

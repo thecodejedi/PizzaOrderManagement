@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\TotalOrder;
 use AppBundle\Entity\SingleOrder;
@@ -17,7 +18,7 @@ use AppBundle\Form\TotalOrderType;
 class OrdersController extends Controller {
 
     /**
-     * @Route("/", name="history")
+     * @Route("/", name="orders")
      * @Template
      */
     public function historyAction(Request $request) {
@@ -78,6 +79,7 @@ class OrdersController extends Controller {
 
     /**
      * @Route("/createTotal", name="createTotalOrder")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template
      */
     public function createTotalAction(Request $request) {
