@@ -147,6 +147,14 @@ class TotalOrder {
 
         return $this;
     }
+    
+    public function getAmmount(){
+        $total = 0;
+        foreach ($this->orders as $order){
+            $total += $order->getProduct()->getPrice();
+        }
+        return $total;
+    }
 
     /**
      * Get date

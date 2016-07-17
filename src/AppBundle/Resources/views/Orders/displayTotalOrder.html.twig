@@ -1,7 +1,23 @@
 {% extends 'base.html.twig' %}
+{% block head_script %}
+    {{ parent() }}
+    <script>
+        function removeSingle($urlToRemove) {
+
+            $.get($urlToRemove, function (data) {
+                location.reload();
+            });
+
+        }
+    </script>
+{% endblock %}
+
 {% block content %}
     <h3>Orders for {{totalOrder.date|date('d.m.y')}}</h3>
     <div class="container container-fluid">
+        <div class="row">
+            <h3>Total Ammount:&nbsp;<b>{{totalOrder.ammount}}€</b></h3>
+        </div>
         <div class="row">
             {% if totalOrder.active %}
                 <div class="col-md-3">
@@ -13,16 +29,27 @@
                 </div>
             {% endif %}
             <div class="col-md-3">
-                <a href="{{path('editTotalAction',{'totalId':totalOrder.id})}}">
+                <a href="{{path('editTotal',{'totalId':totalOrder.id})}}">
                     <h3><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;Edit Order</h3>
                 </a>
             </div>
 
         </div>
+
         {% for order in totalOrder.orders %}
-            <div class="row">
-                <div class="col-md-3">{{order.id}}</div>
+            <div class="row" style="background-color: {{ cycle(["#e6f2ff", "white"], loop.index) }}">
+                {% if totalOrder.active %}
+                    <div class="col-md-1">
+                        <a href="{{path('editSingle',{'singleId':order.id})}}">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" onClick="removeSingle('{{path('deleteSingle',{'singleId':order.id})}}');">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i></i>
+                        </a>
+                    </div>
+                {% endif %}
                 <div class="col-md-3">{{order.name}}</div>
+                <div class="col-md-3">{{order.product.displayName}}</div>
             </div>
         {% endfor %}
     </div>

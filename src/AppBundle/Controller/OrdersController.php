@@ -7,10 +7,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\TotalOrder;
 use AppBundle\Entity\SingleOrder;
 use AppBundle\Form\SingleOrderType;
 use AppBundle\Form\TotalOrderType;
+use Symfony\Component\Form\FormError;
 
 /**
  * @Route("/orders")
@@ -62,6 +64,10 @@ class OrdersController extends Controller {
         $form = $this->createForm(SingleOrderType::class, $singleOrder);
         $form->handleRequest($request);
 
+        if (!$totalOrder->getActive()) {
+            $form->addError(new FormError('The Order has already been closed. Changes are no longer possible'));
+        }
+
         if ($form->get('cancel')->isClicked()) {
             return $this->redirectToRoute('index');
         }
@@ -75,6 +81,61 @@ class OrdersController extends Controller {
 
         return array(
             'form' => $form->createView());
+    }
+
+    /**
+     * @Route("/single/{singleId}", 
+     * requirements = { "singleId" = "[0-9]+" },
+     * name="editSingle")
+     * @Template("AppBundle:Orders:single.html.twig")
+     */
+    public function editSingleAction(Request $request, $singleId) {
+
+        $singleOrder = $this->getDoctrine()
+                ->getRepository('AppBundle:SingleOrder')
+                ->find($singleId);
+
+        $form = $this->createForm(SingleOrderType::class, $singleOrder);
+        $form->handleRequest($request);
+
+        if (!$singleOrder->getOrder()->getActive()) {
+            $form->addError(new FormError('The Order has already been closed. Changes are no longer possible'));
+        }
+
+        if ($form->get('cancel')->isClicked()) {
+            return $this->redirectToRoute('index');
+        }
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($singleOrder);
+            $em->flush();
+            return $this->redirectToRoute('index');
+        }
+
+        return array(
+            'form' => $form->createView());
+    }
+
+    /**
+     * @Route("/single/{singleId}/delete", 
+     * requirements = { "singleId" = "[0-9]+" },
+     * name="deleteSingle")
+     */
+    public function deleteSingleAction(Request $request, $singleId) {
+
+
+        $em = $this->getDoctrine()->getManager();
+        $singleOrder = $em->getRepository('AppBundle:SingleOrder')->find($singleId);
+        if (isset($singleOrder)) {
+
+            if ($singleOrder->getOrder()->getActive()) {
+                $em->remove($singleOrder);
+                $em->flush();
+            }
+        }
+        return new Response(
+                'Content', Response::HTTP_OK, array('content-type' => 'text/html'));
     }
 
     /**
@@ -107,17 +168,17 @@ class OrdersController extends Controller {
 
     /**
      * @Route("/{totalId}/edit", 
-     *          name="editTotalAction",
+     *          name="editTotal",
      *          requirements = { "totalId" = "[0-9]+" })
      * @Security("has_role('ROLE_ADMIN')")
      * @Template("AppBundle:Orders:total.html.twig")
      */
-    public function editTotalAction(Request $request,$totalId) {
-        
+    public function editTotalAction(Request $request, $totalId) {
+
         $totalOrder = $this->getDoctrine()
                 ->getRepository('AppBundle:TotalOrder')
                 ->find($totalId);
-        
+
         $form = $this->createForm(TotalOrderType::class, $totalOrder);
         $form->handleRequest($request);
 
