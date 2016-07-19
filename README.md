@@ -57,11 +57,11 @@ Default config for running in an Apache Webserver:
 ```
 <VirtualHost *:80>
 	
-<Directory /var/www/PizzaOrderManagement/web>
-        AllowOverride All
-</Directory>
+	<Directory /var/www/PizzaOrderManagement/web>
+        	AllowOverride All
+	</Directory>
 	ServerAdmin office@amazing.at
-DocumentRoot /var/www/PizzaOrderManagement/web
+	DocumentRoot /var/www/PizzaOrderManagement/web
 	ErrorLog ${APACHE_LOG_DIR}/error.log
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
