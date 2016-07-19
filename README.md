@@ -82,7 +82,7 @@ $ cd /var/www/PizzaOrderManagement/var/logs/
 $ chmod -R 777 .
 ```
 
-## using PHPs internal webserver
+## Using PHPs internal webserver
 This is actually nice for local development
 ```
 $ cd PizzaOrderManagement
