@@ -82,6 +82,13 @@ $ cd /var/www/PizzaOrderManagement/var/logs/
 $ chmod -R 777 .
 ```
 
+## using PHPs internal webserver
+This is actually nice for local development
+```
+$ cd PizzaOrderManagement
+$ php -S localhost:8000 -t web
+```
+
 # Update to the latest version
 ```
 git pull origin master
