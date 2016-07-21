@@ -15,16 +15,11 @@ use \Symfony\Component\Form\Extension\Core\Type\MoneyType;
  *
  * @author oberfreak
  */
-class ProductType extends AbstractType {
+class ProductGroupType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
         $fields = $builder->add('name', TextType::class, array('label' => 'Name'));
-        $fields = $builder->add('price', MoneyType::class, array('label' => 'Price'));
-        $fields = $builder->add('active', CheckboxType::class, array('label' => 'Active'));
-        $fields = $builder->add('group', EntityType::class, array('label' => 'Group',
-            'class' => 'AppBundle:ProductGroup',
-            'choice_label' => 'name'));
         $readOnly = false;
         if (isset($options['read_only'])) {
             $readOnly = $options['read_only'];
@@ -38,7 +33,7 @@ class ProductType extends AbstractType {
     public function configureOptions(\Symfony\Component\OptionsResolver\OptionsResolver $resolver) {
         parent::configureOptions($resolver);
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Product'
+            'data_class' => 'AppBundle\Entity\ProductGroup'
         ));
     }
 

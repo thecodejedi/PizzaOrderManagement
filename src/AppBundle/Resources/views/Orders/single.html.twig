@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% block content %}
 
     {{ form_start(form) }}
@@ -11,17 +12,21 @@
                 {{ form_errors(form.name) }}
                 {{ form_widget(form.name) }}
             </div>
-        </div>
-        <div class="row">   
-            <div class="col-md-8">
+            <div class="col-md-9">
                 {{ form_label(form.product) }}
                 {{ form_errors(form.product) }}
                 {{ form_widget(form.product) }}
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="row">   
+            <div class="col-md-12">
                 {{ form_label(form.text) }}
                 {{ form_errors(form.text) }}
                 {{ form_widget(form.text) }}
+                <ul>
+                    <li>Garlic +0.5€</li>
+                    <li>Any Change +1€ each</li>
+                </ul>
             </div>
 
         </div>

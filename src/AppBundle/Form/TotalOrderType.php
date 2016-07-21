@@ -17,22 +17,23 @@ class TotalOrderType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
-        $fields = $builder->add('text', TextType::class, array('label' => 'Description'));
-        $fields = $builder->add('active', CheckboxType::class, array('label' => 'Open'));
+        $fields = $builder->add('text', TextType::class, array('label' => 'Description', 'required' => false));
+        $fields = $builder->add('active', CheckboxType::class, array('label' => 'Open', 'required' => false));
         $readOnly = false;
         if (isset($options['read_only'])) {
             $readOnly = $options['read_only'];
         }
-        if(!$readOnly){
-            $fields->add('save', SubmitType::class, array('label' => 'Save','attr' => array('class'=>'btn btn-success')));
+        if (!$readOnly) {
+            $fields->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-success')));
         }
-        $fields->add('cancel', SubmitType::class, array('label' => 'Cancel','attr' => array('class'=>'btn btn-danger','formnovalidate'=>'formnovalidate')));
+        $fields->add('cancel', SubmitType::class, array('label' => 'Cancel', 'attr' => array('class' => 'btn btn-danger', 'formnovalidate' => 'formnovalidate')));
     }
-    
+
     public function configureOptions(\Symfony\Component\OptionsResolver\OptionsResolver $resolver) {
         parent::configureOptions($resolver);
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\TotalOrder'
         ));
     }
+
 }

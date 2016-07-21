@@ -8,7 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Product;
+use AppBundle\Entity\ProductGroup;
 use AppBundle\Form\ProductType;
+use AppBundle\Form\ProductGroupType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
@@ -26,7 +28,11 @@ class ProductController extends Controller {
                 ->getRepository('AppBundle:Product')
                 ->findActive();
 
-        return array('products' => $products);
+        $groups = $this->getDoctrine()
+                ->getRepository('AppBundle:ProductGroup')
+                ->findAll();
+
+        return array('products' => $products, 'groups' => $groups);
     }
 
     /**
@@ -100,6 +106,81 @@ class ProductController extends Controller {
         if (isset($product)) {
             $product->setActive(false);
             $em->persist($product);
+            $em->flush();
+        }
+        return new Response(
+                'Content', Response::HTTP_OK, array('content-type' => 'text/html'));
+    }
+
+    /**
+     * @Route("/groups/create", 
+     * name="createProductGroup")
+     * @Template("AppBundle:Product:productGroup.html.twig")
+     */
+    public function createProductGroupsAction(Request $request) {
+
+        $productGroup = new ProductGroup();
+        $form = $this->createForm(ProductGroupType::class, $productGroup);
+        $form->handleRequest($request);
+
+        if ($form->get('cancel')->isClicked()) {
+            return $this->redirectToRoute('products');
+        }
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($productGroup);
+            $em->flush();
+            return $this->redirectToRoute('products');
+        }
+
+        return array(
+            'form' => $form->createView());
+    }
+
+    /**
+     * @Route("/groups/{productGroupId}", 
+     * requirements = { "productGroupId" = "[0-9]+" },
+     * name="editProductGroup")
+     * @Template("AppBundle:Product:productGroup.html.twig")
+     */
+    public function editProductGroupAction(Request $request, $productGroupId) {
+
+        $productGroup = $this->getDoctrine()
+                ->getRepository('AppBundle:Product')
+                ->find($productGroupId);
+
+        $form = $this->createForm(ProductGroupType::class, $productGroup);
+        $form->handleRequest($request);
+
+        if ($form->get('cancel')->isClicked()) {
+            return $this->redirectToRoute('products');
+        }
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($productGroup);
+            $em->flush();
+            return $this->redirectToRoute('products');
+        }
+
+        return array(
+            'form' => $form->createView());
+    }
+
+    /**
+     * @Route("/groups/{productGroupId}/delete", 
+     * requirements = { "productId" = "[0-9]+" },
+     * name="deleteProductGroup")
+     */
+    public function deleteProductGroupsAction(Request $request, $productGroupId) {
+
+
+        $em = $this->getDoctrine()->getManager();
+        $productGroup = $em->getRepository('AppBundle:ProductGroup')->find($productGroupId);
+
+        if (isset($productGroup)) {
+            $em->remove($productGroup);
             $em->flush();
         }
         return new Response(

@@ -19,15 +19,22 @@ class SingleOrderType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
-        $fields = $builder->add('name', TextType::class, array('label' => 'Name'));
+        $fields = $builder->add('name', TextType::class, array('label' => 'Name', 'attr' => array('placeholder' => 'Fill in your name')));
         $fields = $builder->add('product', EntityType::class, array('label' => 'Product',
             'class' => 'AppBundle:Product',
             'query_builder' => function (ProductRepository $er) {
                 return $er->createQueryBuilder('p')
                                 ->where('p.active = true')
                                 ->orderBy('p.name');
-            }, 'choice_label' => 'displayName'));
-        $fields = $builder->add('text', TextType::class, array('label' => 'Changes'));
+            }, 'choice_label' => 'displayName',
+            'group_by' => function($val, $key, $index) {
+                $group = $val->getGroup();
+                if (isset($group))
+                    return $group->getName();
+                else
+                    return "General";
+            }));
+        $fields = $builder->add('text', TextType::class, array('label' => 'Pizza Changes, Pasta Type (Machheroni, Gnochi, Spaghetti, Tortellini)', 'attr' => array('placeholder' => 'Add your changes')));
         $readOnly = false;
         if (isset($options['read_only'])) {
             $readOnly = $options['read_only'];
