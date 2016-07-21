@@ -23,6 +23,11 @@ class LoadProducts extends AbstractFixture implements OrderedFixtureInterface {
         $product->setPrice(5.5);
         $manager->persist($product);
         
+        $product = new Product();
+        $product->setName("Calzone");
+        $product->setPrice(6.0);
+        $manager->persist($product);
+        
         
         $manager->flush();
 

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <h3>Orders for {{totalOrder.date|date('d.m.y')}}</h3>
+    <div class="container container-fluid">
+        <div class="row">
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>Total Ammount:&nbsp;<b>{{totalOrder.ammount}}€</b></h3>
+                </div><div class="col-md-3">
+                    <h3>Total Orders Count:&nbsp;<b>{{totalOrder.orders|length}}</b></h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <a href="{{path('editTotal',{'totalId':totalOrder.id})}}">
+                    <h3><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;Edit Order</h3>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="{{path('displayTotalOrder',{'totalId':totalOrder.id})}}">
+                    <h3><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;Display By Name</h3>
+                </a>
+            </div>
+
+        </div>
+
+        {% for product in products %}
+            <div class="row" style="background-color: {{ cycle(["#e6f2ff", "white"], loop.index) }}">
+                <div class="col-md-1">
+                    {{product.product.name}}
+                </div>
+                <div class="col-md-1">
+                    {{product.count}}
+                </div>
+                <div class="col-md-1">
+                    <ul>
+                        {% for comment in product.comments %}
+                            <li>{{comment}}</li>
+                            {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

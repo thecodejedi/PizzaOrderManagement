@@ -47,6 +47,47 @@ class OrdersController extends Controller {
     }
 
     /**
+     * @Route("/{totalId}/byProduct", 
+     * requirements = { "totalId" = "[0-9]+" },
+     * name="totalByProduct")
+     * @Template
+     */
+    public function totalByProductAction(Request $request, $totalId) {
+
+        $totalOrder = $this->getDoctrine()
+                ->getRepository('AppBundle:TotalOrder')
+                ->find($totalId);
+        
+        $orders = $totalOrder->getOrders();
+        $products = array();
+        foreach($orders as $order){
+            $product = $order->getProduct();
+            $key = $product->getId();
+            
+            if(isset($products[$key])){
+                $productArr = $products[$key];
+                $comments = $productArr['comments'];
+                $productArr['count'] = $productArr['count']+1;
+                
+            }else{
+                $productArr = array();
+                $productArr["product"] = $product;
+                $productArr['count'] = 1;
+                $comments = array();
+            }
+            if(strlen($order->getText())>0){
+                array_push($comments, $order->getText());   
+            }
+            $productArr["comments"] = $comments;
+            $products[$key] = $productArr;
+            
+        }
+        
+        
+        return array('totalOrder' => $totalOrder,'products'=>$products);
+    }
+    
+    /**
      * @Route("/{totalId}/createSingle", 
      * requirements = { "totalId" = "[0-9]+" },
      * name="createSingle")
