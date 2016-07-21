@@ -11,19 +11,21 @@
                 {{ form_errors(form.name) }}
                 {{ form_widget(form.name) }}
             </div>
-            <div class="col-md-3">
+        </div>
+        <div class="row">   
+            <div class="col-md-8">
                 {{ form_label(form.product) }}
                 {{ form_errors(form.product) }}
                 {{ form_widget(form.product) }}
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 {{ form_label(form.text) }}
                 {{ form_errors(form.text) }}
                 {{ form_widget(form.text) }}
             </div>
 
         </div>
-            <br/>
+        <br/>
         <div class="row">
             <div class="col-md-12">
                 {{ form_widget(form.save) }} {{ form_widget(form.cancel) }}

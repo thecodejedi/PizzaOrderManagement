@@ -20,7 +20,7 @@
             </div>
         </div>
         {% for product in products %}
-            <div class="row">
+            <div class="row" style="background-color: {{ cycle(["#e6f2ff", "white"], loop.index) }}">
                 <div class="col-md-1">
                     <a href="{{path('editProduct',{'productId':product.id})}}">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -29,10 +29,10 @@
                         <i class="fa fa-trash-o" aria-hidden="true"></i></i>
                     </a>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-6">
                     {{product.name}}
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-2">
                     {{product.price}}€
                 </div>
             </div>

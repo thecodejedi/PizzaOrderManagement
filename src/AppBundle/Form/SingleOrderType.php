@@ -24,9 +24,10 @@ class SingleOrderType extends AbstractType {
             'class' => 'AppBundle:Product',
             'query_builder' => function (ProductRepository $er) {
                 return $er->createQueryBuilder('p')
-                                ->where('p.active = true');
+                                ->where('p.active = true')
+                                ->orderBy('p.name');
             }, 'choice_label' => 'displayName'));
-        $fields = $builder->add('text', TextType::class, array('label' => 'Description'));
+        $fields = $builder->add('text', TextType::class, array('label' => 'Changes'));
         $readOnly = false;
         if (isset($options['read_only'])) {
             $readOnly = $options['read_only'];

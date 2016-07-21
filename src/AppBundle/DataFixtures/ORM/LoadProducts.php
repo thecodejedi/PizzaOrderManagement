@@ -23,14 +23,14 @@ class LoadProducts extends AbstractFixture implements OrderedFixtureInterface {
 		$manager->persist(new Product("Pizza Vienna","5.00"));
 		$manager->persist(new Product("Pizza Diabolino","5.00"));
 		$manager->persist(new Product("Pizza Mozzarella","5.00"));
-		$manager->persist(new Product("Menü Pasta Bolognese mit Cola M7","8.90"));
+		$manager->persist(new Product("Menü 7 - Pasta Bolognese mit Cola","8.90"));
 		$manager->persist(new Product("Pizza Cardinale","5.00"));
 		$manager->persist(new Product("Pizza Die Insel","5.00"));
 		$manager->persist(new Product("Pizza Hawaii","5.00"));
 		$manager->persist(new Product("Pizza Provinciale","5.00"));
 		$manager->persist(new Product("Pizza Cardinale mit Knoblauch","5.50"));
 		$manager->persist(new Product("Pizza Funghi","5.00"));
-		$manager->persist(new Product("PIZZA MARGHERITA","5.00"));
+		$manager->persist(new Product("Pizza Margherita","5.00"));
 		$manager->persist(new Product("Hausgemachte Bacon Burger Mit Potato Wedges","8.50"));
 		$manager->persist(new Product("Pizza Salami mit Mais","6.00"));
 		$manager->persist(new Product("Pizza Spinaci ohne Ei","5.00"));
@@ -44,7 +44,6 @@ class LoadProducts extends AbstractFixture implements OrderedFixtureInterface {
 		$manager->persist(new Product("Pizza Caprese","5.00"));
 		$manager->persist(new Product("Pizza Castello","5.00"));
 		$manager->persist(new Product("Pizza Mona Lisa","5.00"));
-		$manager->persist(new Product("Salat Die Insel (Hühnerstreifen natur, Joghurtdressing)","5.00"));
 		$manager->persist(new Product("Pizza Cipolla","5.00"));
 		$manager->persist(new Product("Pizza Rucola","8.10"));
 		$manager->persist(new Product("Pizza Bianka","7.50"));
@@ -105,16 +104,15 @@ class LoadProducts extends AbstractFixture implements OrderedFixtureInterface {
 		$manager->persist(new Product("Pizza Rusticana ohne Ei","5.00"));
 		$manager->persist(new Product("Gebackener Emmentaler Menü","9.50"));
 		$manager->persist(new Product("Cevapcici ","8.00"));
-		$manager->persist(new Product("chicken wings","7.50"));
+		$manager->persist(new Product("Chicken wings","7.50"));
 		$manager->persist(new Product("Pizza Diavolo","5.00"));
 		$manager->persist(new Product("Buffalo Wings","8.00"));
 		$manager->persist(new Product("Pizza Siziliana","5.00"));
-		$manager->persist(new Product("Al Sabi","5.00"));
+		$manager->persist(new Product("Pizza Al Sabi","5.00"));
 		$manager->persist(new Product("Scalopine Die Insel ","10.00"));
 		$manager->persist(new Product("Grillteller mit Pommes","9.00"));
 		$manager->persist(new Product("Pizza Feuerwehr (mit ei)","6.00"));
 		$manager->persist(new Product("Pasta Alla Gorgonzola (Macceroni)","6.50"));
-		$manager->persist(new Product("San Romio","5.00"));
 		$manager->persist(new Product("Pizza Milano ","5.00"));
 		$manager->persist(new Product("gefüllte Pizzastangerl","5.00"));
 

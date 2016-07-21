@@ -41,15 +41,11 @@ class Product {
      * @ORM\OneToMany(targetEntity="SingleOrder", mappedBy="product")
      */
     protected $orders;
+
     /**
      * Constructor
-     */
-    public function __construct()
-    {
-        $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-	
-	public function __construct($name, $price)
+     */	
+    public function __construct($name = null, $price = 0)
     {
         $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->price = $price;

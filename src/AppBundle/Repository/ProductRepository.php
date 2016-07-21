@@ -15,7 +15,8 @@ class ProductRepository extends EntityRepository {
 
         $qb = $this->getEntityManager()
                         ->getRepository('AppBundle:Product')
-                        ->createQueryBuilder('p')->where('p.active = true');
+                        ->createQueryBuilder('p')->where('p.active = true')
+                ->orderBy('p.name');
 
         return $qb->getQuery()->getResult();
     }
