@@ -48,6 +48,14 @@ class Product {
     {
         $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
     }
+	
+	public function __construct($name, $price)
+    {
+        $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->price = $price;
+		$this->name = $name;
+		$this->active = true;
+    }
     
     public function getDisplayName(){
         return $this->getName().' - '.$this->getPrice().'€';
