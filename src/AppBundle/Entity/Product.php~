@@ -33,6 +33,11 @@ class Product {
     protected $price;
     
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $active;
+    
+    /**
      * @ORM\OneToMany(targetEntity="SingleOrder", mappedBy="product")
      */
     protected $orders;

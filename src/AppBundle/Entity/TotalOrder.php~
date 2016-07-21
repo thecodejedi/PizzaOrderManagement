@@ -34,8 +34,6 @@ class TotalOrder {
 
     /**
      * @ORM\Column(type="boolean")
-     * @Assert\Valid
-     * @Assert\NotBlank(message = "Activity has to be set.")
      */
     protected $active;
 
@@ -148,6 +146,14 @@ class TotalOrder {
         $this->date = $date;
 
         return $this;
+    }
+    
+    public function getAmmount(){
+        $total = 0;
+        foreach ($this->orders as $order){
+            $total += $order->getProduct()->getPrice();
+        }
+        return $total;
     }
 
     /**

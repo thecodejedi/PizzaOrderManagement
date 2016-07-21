@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block head_script %}
+    {{ parent() }}
+    <script>
+        function removeProduct($urlToRemove) {
+
+            $.get($urlToRemove, function (data) {
+                location.reload();
+            });
+
+        }
+    </script>
+{% endblock %}
+{% block content %}
+    <h3>Following Products are available</h3>
+    <div class="container container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <h3><a href="{{path('createProduct')}}"><i class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;Create new Product</a></h3>
+            </div>
+        </div>
+        {% for product in products %}
+            <div class="row">
+                <div class="col-md-1">
+                    <a href="{{path('editProduct',{'productId':product.id})}}">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" onClick="removeProduct('{{path('deleteProduct',{'productId':product.id})}}');">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i></i>
+                    </a>
+                </div>
+                <div class="col-md-1">
+                    {{product.name}}
+                </div>
+                <div class="col-md-1">
+                    {{product.price}}€
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
+{% endblock %}

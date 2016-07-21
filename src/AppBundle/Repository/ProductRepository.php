@@ -11,4 +11,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository {
 
+    public function findActive() {
+
+        $qb = $this->getEntityManager()
+                        ->getRepository('AppBundle:Product')
+                        ->createQueryBuilder('p')->where('p.active = true');
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

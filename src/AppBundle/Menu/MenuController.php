@@ -26,6 +26,7 @@ class MenuController Implements ContainerAwareInterface {
         $menu->addChild('Orders', array('route' => 'orders'));
         
         if ($isAuthenticated) {
+            $menu->addChild('Products', array('route' => 'products'));
             $menu->addChild('Logout', array('route' => 'logout_route'));
         }else{
             $menu->addChild('Login', array('route' => 'login_route'));

@@ -26,7 +26,7 @@ class TotalOrderType extends AbstractType {
         if(!$readOnly){
             $fields->add('save', SubmitType::class, array('label' => 'Save','attr' => array('class'=>'btn btn-success')));
         }
-        $fields->add('cancel', SubmitType::class, array('label' => 'Cancel','attr' => array('class'=>'btn btn-danger')));
+        $fields->add('cancel', SubmitType::class, array('label' => 'Cancel','attr' => array('class'=>'btn btn-danger','formnovalidate'=>'formnovalidate')));
     }
     
     public function configureOptions(\Symfony\Component\OptionsResolver\OptionsResolver $resolver) {

@@ -33,6 +33,11 @@ class Product {
     protected $price;
     
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $active;
+    
+    /**
      * @ORM\OneToMany(targetEntity="SingleOrder", mappedBy="product")
      */
     protected $orders;
@@ -138,5 +143,29 @@ class Product {
     public function getOrders()
     {
         return $this->orders;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return Product
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 }

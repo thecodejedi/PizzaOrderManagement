@@ -3,29 +3,26 @@
 
     {{ form_start(form) }}
     {{ form_errors(form) }}
-    <h3>Place your Order</h3>
+    <h3>Product</h3>
     <div class="container-fluid">
-        <div class="row">   
+        <div class="row">  
+            <div class="col-md-2">
+                {{ form_label(form.active) }}
+                {{ form_errors(form.active) }}
+                {{ form_widget(form.active) }}
+            </div>
             <div class="col-md-3">
                 {{ form_label(form.name) }}
                 {{ form_errors(form.name) }}
                 {{ form_widget(form.name) }}
             </div>
-            <div class="col-md-3">
-                {{ form_label(form.product) }}
-                {{ form_errors(form.product) }}
-                {{ form_widget(form.product) }}
-            </div>
             <div class="col-md-6">
-                {{ form_label(form.text) }}
-                {{ form_errors(form.text) }}
-                {{ form_widget(form.text) }}
+                {{ form_label(form.price) }}
+                {{ form_errors(form.price) }}
+                {{ form_widget(form.price) }}
             </div>
-
-        </div>
-            <br/>
-        <div class="row">
-            <div class="col-md-12">
+        </div><br/>
+        <div class="row"><div class="col-md-12">
                 {{ form_widget(form.save) }} {{ form_widget(form.cancel) }}
             </div>
         </div>
