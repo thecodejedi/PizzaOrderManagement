@@ -34,7 +34,7 @@ class SingleOrderType extends AbstractType {
                 else
                     return "General";
             }));
-        $fields = $builder->add('text', TextType::class, array('label' => 'Pizza Changes, Pasta Type (Machheroni, Gnochi, Spaghetti, Tortellini)', 'attr' => array('placeholder' => 'Add your changes')));
+        $fields = $builder->add('text', TextType::class, array('label' => 'Pizza Changes, Pasta Type (Machheroni, Gnochi, Spaghetti, Tortellini)', 'required' => false, 'attr' => array('placeholder' => 'Add your changes')));
         $readOnly = false;
         if (isset($options['read_only'])) {
             $readOnly = $options['read_only'];
