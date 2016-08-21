@@ -25,23 +25,26 @@
         <div class="row">
             {% if totalOrder.active %}
                 <div class="col-md-4">
-                    <h3><a href="{{path('createSingle',{'totalId':totalOrder.id})}}"><i class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;Create new Order</a></h3>
+                    <h3><a href="{{path('createSingle',{'totalId':totalOrder.id})}}"><i class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;Place new Order</a></h3>
                 </div>
             {% else %}
                 <div class="col-md-4">
                     <h3 style="color: orange"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;This order is closed.</h3>
                 </div>
             {% endif %}
-            <div class="col-md-4">
-                <a href="{{path('editTotal',{'totalId':totalOrder.id})}}">
-                    <h3><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;Edit Order</h3>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="{{path('totalByProduct',{'totalId':totalOrder.id})}}">
-                    <h3><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;Display By Product</h3>
-                </a>
-            </div>
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <div class="col-md-4">
+                    <a href="{{path('editTotal',{'totalId':totalOrder.id})}}">
+                        <h3><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;Edit Order</h3>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{{path('totalByProduct',{'totalId':totalOrder.id})}}">
+                        <h3><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;Display By Product</h3>
+                    </a>
+                </div>
+            {% endif %}
         </div>
 
         {% for order in totalOrder.orders %}

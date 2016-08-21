@@ -6,9 +6,11 @@
         {% for totalOrder in allOrders %}
             <div class="row">
                 <div class="col-md-1">
-                    <a href="{{path('editTotal',{'totalId':totalOrder.id})}}">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    </a>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a href="{{path('editTotal',{'totalId':totalOrder.id})}}">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a>
+                    {% endif%}
                     <a href="{{path('displayTotalOrder',{'totalId':totalOrder.id})}}">
                         <i class="fa fa-list-ol" aria-hidden="true"></i>
 
