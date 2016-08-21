@@ -200,6 +200,9 @@ class OrdersController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($singleOrder);
             $em->flush();
+            if($singleOrder->getPayed()){
+                return $this->redirectToRoute('index');
+            }
             return $this->redirectToRoute('confirmPayed', array('singleId' => $singleOrder->getId()));
         }
 
