@@ -59,6 +59,13 @@
                         </a>
                     </div>
                 {% endif %}
+                <div class="col-md-1">
+                    {%if order.payed %}
+                        <i style='color: green' class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                    {%else%}
+                        <a href='{{path('confirmPayed',{'singleId':order.id})}}'<i style='color: red' class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
+                    {% endif %}
+                </div>
                 <div class="col-md-2">{{order.name}}</div>
                 <div class="col-md-6">{{order.product.displayName}}</div>
             </div>

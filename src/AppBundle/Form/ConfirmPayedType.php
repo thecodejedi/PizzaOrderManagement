@@ -7,19 +7,19 @@ use Symfony\Component\Form\FormBuilderInterface;
 use \Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use \Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use \AppBundle\Repository\ProductRepository;
 
 /**
  * Description of CustomerType
  *
  * @author oberfreak
  */
-class TotalOrderType extends AbstractType {
+class ConfirmPayedType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
-        $fields = $builder->add('text', TextType::class, array('label' => 'Description', 'required' => false));
-        $fields = $builder->add('code', TextType::class, array('label' => 'Code', 'required' => true));
-        $fields = $builder->add('active', CheckboxType::class, array('label' => 'Open', 'required' => false));
+        $fields = $builder->add('code', TextType::class, array('label' => 'Code', 'attr' => array('placeholder' => 'Fill in todays code')));
         $readOnly = false;
         if (isset($options['read_only'])) {
             $readOnly = $options['read_only'];
@@ -27,13 +27,13 @@ class TotalOrderType extends AbstractType {
         if (!$readOnly) {
             $fields->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-success')));
         }
-        $fields->add('cancel', SubmitType::class, array('label' => 'Cancel', 'attr' => array('class' => 'btn btn-danger', 'formnovalidate' => 'formnovalidate')));
+        $fields->add('cancel', SubmitType::class, array('label' => 'Later', 'attr' => array('class' => 'btn btn-danger', 'formnovalidate' => 'formnovalidate')));
     }
 
     public function configureOptions(\Symfony\Component\OptionsResolver\OptionsResolver $resolver) {
         parent::configureOptions($resolver);
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\TotalOrder'
+            'data_class' => null
         ));
     }
 

@@ -24,6 +24,11 @@ class TotalOrder {
      * @ORM\Column(type="text", nullable = true)
      */
     protected $text;
+    
+    /**
+     * @ORM\Column(type="text", nullable = false)
+     */
+    protected $code;
 
     /**
      *
@@ -164,5 +169,29 @@ class TotalOrder {
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     *
+     * @return TotalOrder
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 }

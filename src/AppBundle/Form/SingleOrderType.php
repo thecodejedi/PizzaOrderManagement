@@ -40,7 +40,7 @@ class SingleOrderType extends AbstractType {
             $readOnly = $options['read_only'];
         }
         if (!$readOnly) {
-            $fields->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-success')));
+            $fields->add('save', SubmitType::class, array('label' => 'Continue', 'attr' => array('class' => 'btn btn-success')));
         }
         $fields->add('cancel', SubmitType::class, array('label' => 'Cancel', 'attr' => array('class' => 'btn btn-danger', 'formnovalidate' => 'formnovalidate')));
     }

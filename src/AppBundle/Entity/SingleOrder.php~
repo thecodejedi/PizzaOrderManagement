@@ -13,6 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class SingleOrder {
     
+    function __construct() {
+       $payed = false;
+    }
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -31,6 +34,13 @@ class SingleOrder {
      * @Assert\NotNull
      */
     protected $name;
+    
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     * @Assert\Valid
+     * @Assert\NotNull
+     */
+    protected $payed;
     
     /**
      * @ORM\ManyToOne(targetEntity="TotalOrder", inversedBy="orders", cascade={"persist"})
@@ -148,5 +158,29 @@ class SingleOrder {
     public function getProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Set payed
+     *
+     * @param boolean $payed
+     *
+     * @return SingleOrder
+     */
+    public function setPayed($payed)
+    {
+        $this->payed = $payed;
+
+        return $this;
+    }
+
+    /**
+     * Get payed
+     *
+     * @return boolean
+     */
+    public function getPayed()
+    {
+        return $this->payed;
     }
 }
