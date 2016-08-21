@@ -64,6 +64,9 @@ class OrdersController extends Controller {
         foreach ($orders as $order) {
             $product = $order->getProduct();
             $key = $product->getId();
+            if (strlen($order->getText()) > 0) {
+                $key .= strtolower($order->getText());
+            }
 
             if (isset($products[$key])) {
                 $productArr = $products[$key];
@@ -74,9 +77,9 @@ class OrdersController extends Controller {
                 $productArr["product"] = $product;
                 $productArr['count'] = 1;
                 $comments = array();
-            }
-            if (strlen($order->getText()) > 0) {
-                array_push($comments, $order->getText());
+                if (strlen($order->getText()) > 0) {
+                    array_push($comments, $order->getText());
+                }
             }
             $productArr["comments"] = $comments;
             $products[$key] = $productArr;
