@@ -153,7 +153,7 @@ class TotalOrder {
         return $this;
     }
     
-    public function getAmmount(){
+    public function getAmount(){
         $total = 0;
         foreach ($this->orders as $order){
             $total += $order->getProduct()->getPrice();
